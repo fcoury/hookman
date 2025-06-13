@@ -2,6 +2,7 @@
 
 [![Tests](https://github.com/fcoury/hookman/actions/workflows/tests.yml/badge.svg)](https://github.com/fcoury/hookman/actions/workflows/tests.yml)
 [![CI](https://github.com/fcoury/hookman/actions/workflows/ci.yml/badge.svg)](https://github.com/fcoury/hookman/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/fcoury/hookman/branch/master/graph/badge.svg)](https://codecov.io/gh/fcoury/hookman)
 
 A command-line tool for managing Git hooks across projects with a simple, declarative configuration.
 
