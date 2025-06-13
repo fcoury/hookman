@@ -2,9 +2,9 @@ mod toml_storage;
 
 pub use toml_storage::TomlStorage;
 
-use std::path::PathBuf;
+use crate::models::{Config, Hook, HookType};
 use anyhow::Result;
-use crate::models::{Hook, HookType, Config};
+use std::path::PathBuf;
 
 pub const HOOKMAN_DIR: &str = ".hookman";
 pub const HOOKS_DIR: &str = "hooks";

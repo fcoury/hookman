@@ -1,7 +1,7 @@
-use std::str::FromStr;
+use crate::models::Command;
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
-use crate::models::Command;
+use std::str::FromStr;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ValueEnum, Default)]
 #[serde(rename_all = "kebab-case")]
@@ -46,7 +46,7 @@ impl HookType {
             HookType::PostRewrite => "post-rewrite",
         }
     }
-    
+
     pub fn all() -> Vec<HookType> {
         vec![
             HookType::PreCommit,
@@ -77,7 +77,7 @@ impl std::fmt::Display for HookType {
 
 impl FromStr for HookType {
     type Err = String;
-    
+
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "pre-commit" => Ok(HookType::PreCommit),
@@ -131,9 +131,18 @@ mod tests {
     #[test]
     fn test_hook_type_from_str() {
         use std::str::FromStr;
-        assert_eq!(<HookType as FromStr>::from_str("pre-commit").unwrap(), HookType::PreCommit);
-        assert_eq!(<HookType as FromStr>::from_str("pre-push").unwrap(), HookType::PrePush);
-        assert_eq!(<HookType as FromStr>::from_str("commit-msg").unwrap(), HookType::CommitMsg);
+        assert_eq!(
+            <HookType as FromStr>::from_str("pre-commit").unwrap(),
+            HookType::PreCommit
+        );
+        assert_eq!(
+            <HookType as FromStr>::from_str("pre-push").unwrap(),
+            HookType::PrePush
+        );
+        assert_eq!(
+            <HookType as FromStr>::from_str("commit-msg").unwrap(),
+            HookType::CommitMsg
+        );
         assert!(<HookType as FromStr>::from_str("invalid-hook").is_err());
     }
 

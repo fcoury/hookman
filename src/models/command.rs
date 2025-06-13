@@ -28,7 +28,7 @@ mod tests {
             "echo test".to_string(),
             Some("Test command".to_string()),
         );
-        
+
         assert_eq!(cmd.id, "test");
         assert_eq!(cmd.command, "echo test");
         assert_eq!(cmd.description, Some("Test command".to_string()));
@@ -36,12 +36,8 @@ mod tests {
 
     #[test]
     fn test_command_new_without_description() {
-        let cmd = Command::new(
-            "test".to_string(),
-            "echo test".to_string(),
-            None,
-        );
-        
+        let cmd = Command::new("test".to_string(), "echo test".to_string(), None);
+
         assert_eq!(cmd.id, "test");
         assert_eq!(cmd.command, "echo test");
         assert_eq!(cmd.description, None);
@@ -54,10 +50,10 @@ mod tests {
             "cargo fmt".to_string(),
             Some("Format code".to_string()),
         );
-        
+
         let serialized = toml::to_string(&cmd).unwrap();
         let deserialized: Command = toml::from_str(&serialized).unwrap();
-        
+
         assert_eq!(cmd, deserialized);
     }
 }
