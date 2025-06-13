@@ -19,10 +19,6 @@ jobs:
             target: x86_64-unknown-linux-gnu
             artifact_name: hookman
             asset_name: hookman-linux-amd64
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-            artifact_name: hookman.exe
-            asset_name: hookman-windows-amd64.exe
           - os: macos-latest
             target: x86_64-apple-darwin
             artifact_name: hookman
@@ -31,6 +27,7 @@ jobs:
             target: aarch64-apple-darwin
             artifact_name: hookman
             asset_name: hookman-macos-arm64
+          # Windows is not fully supported due to differences in file permissions
     steps:
     - uses: actions/checkout@v4
     

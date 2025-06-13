@@ -237,6 +237,14 @@ walkdir = "2.0"
 - [ ] Hook testing framework
 - [ ] Performance metrics
 
+## Platform Support
+
+Hookman is primarily developed for Unix-like systems (Linux, macOS). Windows support is limited:
+
+- ✅ Full support on Linux and macOS
+- ⚠️  Limited support on Windows (Git Bash recommended)
+- ⚠️  On Windows, hook scripts may need manual executable permissions
+
 ## Contributing
 
 1. Fork the repository

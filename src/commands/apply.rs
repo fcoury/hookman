@@ -4,6 +4,7 @@ use crate::storage::{get_git_hooks_dir, Storage, TomlStorage};
 use anyhow::Result;
 use colored::Colorize;
 use std::fs;
+#[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
 
 pub fn execute(dry_run: bool) -> Result<()> {
@@ -67,10 +68,25 @@ pub fn execute(dry_run: bool) -> Result<()> {
             // Write the hook script
             fs::write(&hook_path, script)?;
 
-            // Make it executable
-            let mut perms = fs::metadata(&hook_path)?.permissions();
-            perms.set_mode(0o755);
-            fs::set_permissions(&hook_path, perms)?;
+            // Make it executable (Unix only)
+            #[cfg(unix)]
+            {
+                let mut perms = fs::metadata(&hook_path)?.permissions();
+                perms.set_mode(0o755);
+                fs::set_permissions(&hook_path, perms)?;
+            }
+
+            #[cfg(windows)]
+            {
+                println!(
+                    "{}",
+                    format!(
+                        "  Note: You may need to manually set {} as executable",
+                        hook_path.display()
+                    )
+                    .yellow()
+                );
+            }
 
             println!("{}", format!("✓ Applied {} hook", hook_type).green());
         }
