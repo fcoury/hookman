@@ -116,3 +116,45 @@ impl Hook {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_hook_type_as_str() {
+        assert_eq!(HookType::PreCommit.as_str(), "pre-commit");
+        assert_eq!(HookType::PrePush.as_str(), "pre-push");
+        assert_eq!(HookType::CommitMsg.as_str(), "commit-msg");
+    }
+
+    #[test]
+    fn test_hook_type_from_str() {
+        use std::str::FromStr;
+        assert_eq!(<HookType as FromStr>::from_str("pre-commit").unwrap(), HookType::PreCommit);
+        assert_eq!(<HookType as FromStr>::from_str("pre-push").unwrap(), HookType::PrePush);
+        assert_eq!(<HookType as FromStr>::from_str("commit-msg").unwrap(), HookType::CommitMsg);
+        assert!(<HookType as FromStr>::from_str("invalid-hook").is_err());
+    }
+
+    #[test]
+    fn test_hook_type_display() {
+        assert_eq!(format!("{}", HookType::PreCommit), "pre-commit");
+        assert_eq!(format!("{}", HookType::PrePush), "pre-push");
+    }
+
+    #[test]
+    fn test_hook_type_all() {
+        let all_hooks = HookType::all();
+        assert_eq!(all_hooks.len(), 16);
+        assert!(all_hooks.contains(&HookType::PreCommit));
+        assert!(all_hooks.contains(&HookType::PostRewrite));
+    }
+
+    #[test]
+    fn test_hook_new() {
+        let hook = Hook::new(HookType::PreCommit);
+        assert_eq!(hook.hook_type, HookType::PreCommit);
+        assert!(hook.commands.is_empty());
+    }
+}

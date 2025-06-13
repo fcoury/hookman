@@ -14,9 +14,12 @@ impl TomlStorage {
 
 impl Storage for TomlStorage {
     fn init(&self) -> Result<()> {
-        let _hookman_dir = get_hookman_dir()?;
+        let hookman_dir = get_hookman_dir()?;
         let hooks_dir = get_hooks_dir()?;
         
+        // Create the .hookman directory first
+        fs::create_dir_all(&hookman_dir)?;
+        // Then create the hooks subdirectory
         fs::create_dir_all(&hooks_dir)?;
         
         let config = Config::default();
