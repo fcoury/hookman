@@ -1,0 +1,6 @@
+hook_type = "pre-commit"
+
+[[commands]]
+id = "format"
+command = "cargo fmt -- --check"
+description = "Check Rust formatting"
