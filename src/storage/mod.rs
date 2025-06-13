@@ -16,6 +16,7 @@ pub trait Storage {
     fn load_hook(&self, hook_type: HookType) -> Result<Hook>;
     fn save_hook(&self, hook: &Hook) -> Result<()>;
     fn list_hooks(&self) -> Result<Vec<HookType>>;
+    #[allow(dead_code)]
     fn load_config(&self) -> Result<Config>;
     fn save_config(&self, config: &Config) -> Result<()>;
 }

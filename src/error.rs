@@ -1,6 +1,7 @@
 use thiserror::Error;
 
 #[derive(Error, Debug)]
+#[allow(dead_code)]
 pub enum HookmanError {
     #[error("Not in a Git repository")]
     NotInGitRepo,
