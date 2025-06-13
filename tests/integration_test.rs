@@ -15,11 +15,9 @@ fn test_hookman_workflow() {
     let temp_dir = setup_test_repo();
     let repo_path = temp_dir.path();
 
-    // Change to the test directory
-    std::env::set_current_dir(repo_path).unwrap();
-
     // Test init command
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(repo_path)
         .arg("init")
         .output()
         .expect("Failed to execute init command");
@@ -36,6 +34,7 @@ fn test_hookman_workflow() {
 
     // Test add command
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(repo_path)
         .args(&[
             "add",
             "pre-commit",
@@ -60,6 +59,7 @@ fn test_hookman_workflow() {
 
     // Test list command
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(repo_path)
         .arg("list")
         .output()
         .expect("Failed to execute list command");
@@ -72,6 +72,7 @@ fn test_hookman_workflow() {
 
     // Test apply command
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(repo_path)
         .arg("apply")
         .output()
         .expect("Failed to execute apply command");
@@ -96,6 +97,7 @@ fn test_hookman_workflow() {
 
     // Test remove command
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(repo_path)
         .args(&["remove", "pre-commit", "test"])
         .output()
         .expect("Failed to execute remove command");
@@ -111,9 +113,9 @@ fn test_hookman_workflow() {
 #[test]
 fn test_not_in_git_repo() {
     let temp_dir = TempDir::new().unwrap();
-    std::env::set_current_dir(temp_dir.path()).unwrap();
 
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(temp_dir.path())
         .arg("init")
         .output()
         .expect("Failed to execute init command");
@@ -126,9 +128,9 @@ fn test_not_in_git_repo() {
 #[test]
 fn test_hookman_not_initialized() {
     let temp_dir = setup_test_repo();
-    std::env::set_current_dir(temp_dir.path()).unwrap();
 
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_hookman"))
+        .current_dir(temp_dir.path())
         .args(&["add", "pre-commit", "echo test", "--id", "test"])
         .output()
         .expect("Failed to execute add command");
