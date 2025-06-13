@@ -1,5 +1,8 @@
 # Hookman - Git Hooks Manager
 
+[![Tests](https://github.com/fcoury/hookman/actions/workflows/tests.yml/badge.svg)](https://github.com/fcoury/hookman/actions/workflows/tests.yml)
+[![CI](https://github.com/fcoury/hookman/actions/workflows/ci.yml/badge.svg)](https://github.com/fcoury/hookman/actions/workflows/ci.yml)
+
 A command-line tool for managing Git hooks across projects with a simple, declarative configuration.
 
 ## Overview
